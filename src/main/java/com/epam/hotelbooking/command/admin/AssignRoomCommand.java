@@ -71,7 +71,7 @@ public class AssignRoomCommand implements Command {
         }
 
         DaysCalculator daysCalculator = new DaysCalculator();
-        long days = daysCalculator.getDaysBetweenDates(application);
+        int days = daysCalculator.getDaysBetweenDates(application);
 
         BigDecimal price = new BigDecimal(request.getParameter(PRICE_PARAM));
         Integer places = application.getPlaces();

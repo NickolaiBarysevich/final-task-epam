@@ -7,9 +7,9 @@ import java.time.temporal.ChronoUnit;
 
 public class DaysCalculator {
 
-    public long getDaysBetweenDates(Application application) {
+    public int getDaysBetweenDates(Application application) {
         LocalDate checkIn = application.getCheckInDate().toLocalDate();
         LocalDate checkOut = application.getCheckOutDate().toLocalDate();
-        return ChronoUnit.DAYS.between(checkIn, checkOut);
+        return (int) ChronoUnit.DAYS.between(checkIn, checkOut);
     }
 }

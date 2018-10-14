@@ -5,6 +5,7 @@ import com.epam.hotelbooking.entity.Application;
 import com.epam.hotelbooking.entity.ApplicationStatus;
 import com.epam.hotelbooking.exception.DaoException;
 import com.epam.hotelbooking.exception.ServiceException;
+import com.epam.hotelbooking.tag.DateTag;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,14 +36,6 @@ public class ApplicationService {
     }
 
 
-    public List<Application> findAll() throws ServiceException {
-        try {
-            return dao.findAll();
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
-    }
-
     public boolean saveApplication(Application application) throws ServiceException {
         try {
             return dao.save(application);
@@ -58,4 +51,5 @@ public class ApplicationService {
             throw new ServiceException(e.getMessage(), e);
         }
     }
+
 }

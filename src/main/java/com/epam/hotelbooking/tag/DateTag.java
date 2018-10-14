@@ -41,4 +41,6 @@ public class DateTag extends TagSupport {
         LocalDate currentDate = LocalDate.now();
         return currentDate.toString();
     }
+
+
 }
