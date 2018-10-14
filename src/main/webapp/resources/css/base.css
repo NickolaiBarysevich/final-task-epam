@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Krub', 'Open Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.header {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 59px;
+}
+
+.link {
+    background-color: #407af2;
+    color: #e7f2ed;
+    text-align: center;
+    padding: 19px 12px;
+    text-decoration: none;
+}
+
+.sub-button {
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #19bdf0;
+    color: white;
+    font-size: 15px;
+    border: none;
+    transition: all 0.5s;
+}
+
+.sub-button:hover {
+    box-shadow: 0 0 10px #28c307;
+    background-color: #407af2;
+}
+
+.logo {
+    margin: 7px 0 0 15px;
+    float: left;
+    display: block;
+    color: #407af2;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+.main-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.link:hover {
+    background-color: #5baeff;
+
+}
+
+.error-block {
+    display: inline-block;
+    background: rgba(243, 243, 243, 0.9);
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.content {
+    position: absolute;
+    height: 85%;
+    width: 100%;
+    box-sizing: border-box;
+
+    background: url("../images/minsk.jpg") no-repeat 15% fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    transition: all .3s;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: initial;
+    transition-delay: initial;
+
+}
+
+.phone {
+    margin: 0 16px;
+    font-size: 25px;
+    color: #407af2;
+}
+
+.logo {
+    margin: 14px 27px 0;
+    float: left;
+    display: block;
+    color: #407af2;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+.default-container {
+    background-color: rgba(204, 204, 204, 0.75);
+    padding: 35px 50px;
+    border-radius: 25px;
+}
+
+.main-menu {
+    margin: 10px 0 16px 0;
+    float: right;
+}
+
+.main-menu:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.main-menu li {
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}
+
+.main-menu::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.red_text {
+    color: red;
+}
+
+.another-link {
+    text-decoration: none;
+    text-align: center;
+    background: cornflowerblue;
+    padding: 3px;
+    border: 1px solid black;
+    color: white;
+}
+
+.another-link:hover {
+    background: #475e9d;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .header {
+        height: 39px;
+    }
+
+    .link {
+        border-radius: 0;
+        font-size: small;
+        width: auto;
+        height: auto;
+        padding: 16px 10px;
+    }
+
+    .phone {
+        display: none;
+    }
+
+    .logo {
+        float: right;
+        font-size: 20px;
+        padding: 0;
+        margin: 6px 3px 0 0;
+    }
+
+    .default-container {
+        padding: 35px 27px
+    }
+
+    .main-menu {
+        float: left;
+        display: block;
+
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border: 1px solid gray;
+    }
+
+    .main-menu li {
+        display: inline;
+        margin: 0;
+    }
+
+    .main-menu > li {
+        position: absolute;
+        z-index: 2;
+        display: inline-block;
+    }
+
+    .main-menu a {
+        display: block;
+        margin-left: -1px;
+        padding: 8px 9px;
+        color: #ffffff;
+        background-color: #407af2;
+        text-decoration: none;
+        text-align: left;
+        margin-top: -1px;
+        border: 1px solid black;
+    }
+
+    .main-menu a:hover {
+        background-color: #5baeff;
+    }
+
+    .main-menu .sub-menu {
+        position: absolute;
+        left: 1px;
+        display: none;
+        width: 150px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background-color: #fcf8e3;
+
+    }
+
+    .main-menu .sub-menu a {
+        margin-bottom: -1px;
+        border: 1px solid #e5e5e5;
+    }
+
+    .main-menu > li:hover .sub-menu {
+        display: block;
+    }
+
+}
+

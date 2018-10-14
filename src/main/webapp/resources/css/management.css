@@ -1,0 +1,96 @@
+table {
+    border: 1px solid;
+    text-align: center;
+    width: 100%;
+    border-bottom: none;
+    border-right: none;
+    background: white;
+}
+
+td, th {
+    padding: 3px;
+}
+
+th {
+    background: lightblue;
+    border-right: 1px solid black;
+}
+
+
+form {
+    margin: 0;
+}
+
+tr{
+    cursor: pointer;
+}
+
+tr:focus {
+    background: #5ab8e6;
+    color: white;
+}
+
+td {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black ;
+}
+
+.work-place {
+    background-color: rgba(204, 204, 204, 0.9);
+    min-height: 466px;
+    margin: 50px 20px 20px 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.align-center{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 3%;
+    left: 50%;
+}
+
+.page-button {
+    text-decoration: none;
+    color: white;
+    background: #5baeff;
+    padding: 3px;
+}
+
+.page-button:hover {
+    background: #2e71b3;
+}
+
+.selected {
+    text-decoration: none;
+    color: white;
+    background: #2e71b3;
+    padding: 3px;
+}
+
+
+
+.pages-holder {
+    margin-top: -50px;
+    text-align: center;
+}
+
+.assign-button {
+    float: right;
+    background: rgba(70, 189, 22, 0.75);
+}
+
+.assign-button:hover {
+    background: rgb(70, 189, 22);
+}
+
+.application-info {
+    text-align: center;
+}
+
+.application-info span {
+    display: inline-block;
+    background-color: gainsboro;
+    padding: 3px;
+    border-radius: 3px;
+}

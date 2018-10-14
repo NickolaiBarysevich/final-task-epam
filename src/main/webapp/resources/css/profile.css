@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+table {
+
+    text-align: center;
+    width: 100%;
+
+}
+
+td, th {
+    padding: 3px;
+}
+
+th {
+    background: #5ab8e6;
+    color: white;
+}
+
+form {
+    margin: 0;
+}
+
+div h2 {
+    margin: 0;
+}
+
+.profile-content {
+    padding: 10px;
+    min-width: 510px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translate(-50%, -50%);
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.info-container {
+
+    min-height: 200px;
+}
+
+.selected {
+    text-decoration: none;
+    color: white;
+    background: #2e71b3;
+    padding: 3px;
+}
+
+.page-button {
+    text-decoration: none;
+    color: white;
+    background: #5baeff;
+    padding: 3px;
+}
+
+.page-button:hover {
+    background: #2e71b3;
+}
+
+.confirm-block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+.message-block {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 534px;
+    text-align: center;
+    font-size: 28px;
+    border-radius: 2px;
+}
+
+.to-right {
+    float: right;
+}
+
+.to-right:after {
+    content: '';
+}
+
+.pay-button {
+    background: #28c307;
+    color: white;
+    padding: 8px;
+    border: 1px solid lightgray;
+    transition: 1s all;
+}
+
+.pay-button:hover {
+    background: #1be390;
+}
+
+.profile-content hr {
+    padding: 0;
+    margin: 2px;
+}
+
+.profile-link {
+    text-decoration: none;
+    background: #5baeff;
+    color: white;
+    padding: 8.5px;
+    border: none;
+}
+
+.profile-link:hover {
+    background: #3e67d4;
+
+}
+
+.link-container {
+    padding: 7px 15px;
+}
+
+
+
+.info-link {
+    text-decoration: none;
+    color: white;
+    padding: 7px;
+}
+
+.info-link-td {
+    background: dodgerblue;
+}
+
+.info-link-td:hover {
+    background: #1850a0;
+}
+
+.to_hide {
+    display: table-cell;
+}
+
+.page-container {
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .info-container {
+        border-right: 15px;
+        height: auto;
+        border-left: none;
+        padding: 0;
+    }
+
+    .to_hide {
+        display: none;
+    }
+
+    .profile-content {
+        min-width: fit-content;
+        margin: 0;
+        border-radius: 0;
+        padding-top: 0;
+        transform: none;
+        position: initial;
+        width: 100%;
+        display: block;
+        background-color: rgba(240, 252, 255, 0.9);
+
+    }
+
+    .message-block {
+        position: static;
+        transform: none;
+        top: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    .link-container {
+        display: inline-grid;
+    }
+
+    .profile-link {
+        margin: 1px;
+    }
+}

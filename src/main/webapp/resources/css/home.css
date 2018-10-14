@@ -1,0 +1,59 @@
+.guest-field {
+    padding: 5px;
+    width: 45px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.input-form {
+    text-align: center;
+    padding: 5px;
+    width: 170px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+
+.label {
+    font-size: 19px;
+}
+
+.slogan {
+    display: block;
+    color: white;
+    font-size: 48px;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 0 0 20px 0;
+    background-color: rgba(204, 204, 204, 0.6);
+}
+
+.input_block {
+    display: inline-block;
+}
+
+.application {
+    font-size: 20px;
+    background-color: rgba(245, 245, 245, 0.9);
+    padding: 14px;
+    border-radius: 10px;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .input_block {
+        display: block;
+    }
+
+    .slogan {
+        display: none;
+    }
+
+    .application {
+        width: auto;
+        background-color: rgba(245, 245, 245, 0.7);
+    }
+
+
+}
