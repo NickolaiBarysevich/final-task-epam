@@ -1,6 +1,7 @@
 package com.epam.hotelbooking.command.client;
 
 import com.epam.hotelbooking.command.Command;
+import com.epam.hotelbooking.command.CommonConstants;
 import com.epam.hotelbooking.command.JspConstants;
 import com.epam.hotelbooking.entity.Application;
 import com.epam.hotelbooking.entity.Bill;
@@ -14,14 +15,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-public class ShowInfoCommand implements Command {
+/**
+ * Finds application and represents it on jsp.
+ *
+ * @author Nickolai Barysevich.
+ */
+public class ApplicationInfoCommand implements Command {
 
     private final ApplicationBillDtoService service;
 
-    public ShowInfoCommand(ApplicationBillDtoService service) {
+    public ApplicationInfoCommand(ApplicationBillDtoService service) {
         this.service = service;
     }
 
+    /**
+     * Finds application and put information about it
+     * into {@code request}.
+     *
+     * @param request  http request that was got from browser
+     * @param response http response that should be sent to browser
+     * @return applicationInfo.jsp
+     * @throws ServiceException if some service error has occurred
+     *                          or {@code optionApplication} is {Optional.empty}.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 
@@ -43,7 +59,7 @@ public class ShowInfoCommand implements Command {
             }
         }
 
-        return JspConstants.NOT_FOUND_JSP;
+        throw new ServiceException("application" + CommonConstants.NOT_EXIST);
 
     }
 

@@ -10,6 +10,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link Application}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class ApplicationBuilder implements Builder<Application> {
 

@@ -24,14 +24,6 @@ public class BillService {
         }
     }
 
-    public boolean isApproved(Long applicationId) throws ServiceException {
-        try {
-            Optional<Bill> bill = dao.findBillByApplicationId(applicationId);
-            return bill.isPresent();
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
-    }
 
     public Optional<Bill> findBillByApplicationId(Long id) throws ServiceException {
         try {

@@ -17,7 +17,7 @@
 
 <header class="header">
     <a class="logo"
-       href="controller?command=${role.value == 'administrator' ? 'management' : 'showHome'}">BestHotel.com</a>
+       href="controller?command=${role.value == 'administrator' ? 'management' : 'showApplicationRegistration'}">BestHotel.com</a>
     <ul class="main-menu">
         <li><a class="hidden"><fmt:message key="header.menu" bundle="${lang}"/></a>
             <ul class="sub-menu">

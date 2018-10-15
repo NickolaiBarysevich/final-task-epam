@@ -10,6 +10,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link RoomDto}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class RoomDtoBuilder implements Builder<RoomDto> {
 

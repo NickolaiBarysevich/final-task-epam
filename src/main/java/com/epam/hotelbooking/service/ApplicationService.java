@@ -50,4 +50,22 @@ public class ApplicationService {
         }
     }
 
+    public boolean isCancelable(Long applicationId) throws ServiceException {
+        try {
+
+            Optional<Application> optionalApplication = dao.findById(applicationId);
+            if (optionalApplication.isPresent()) {
+                Application application = optionalApplication.get();
+                ApplicationStatus status = application.getApplicationStatus();
+                return status == ApplicationStatus.CONSIDERING
+                        || status == ApplicationStatus.APPROVED;
+            }
+
+            throw new ServiceException("application doesn't exist");
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+
 }

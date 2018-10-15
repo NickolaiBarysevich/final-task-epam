@@ -54,7 +54,7 @@
             <div class="input_block">
                 <label class="label"><fmt:message key="home.roomClass" bundle="${lang}"/></label>
                 <br>
-                <select class="input-form" name="room_class">
+                <select class="input-form" name="room_class_id">
                     <option value="1"><fmt:message key="home.standard" bundle="${lang}"/></option>
                     <option value="2"><fmt:message key="home.comfort" bundle="${lang}"/></option>
                     <option value="3"><fmt:message key="home.comfort+" bundle="${lang}"/></option>

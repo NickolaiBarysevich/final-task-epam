@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link Room}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class RoomBuilder implements Builder<Room> {
 

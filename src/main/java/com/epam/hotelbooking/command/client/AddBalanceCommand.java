@@ -12,18 +12,42 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
+/**
+ * Adds "money" to user's wallet.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class AddBalanceCommand implements Command {
 
+    /**
+     * Adding value attribute name
+     */
     private static final String ADDING_VALUE = "addingValue";
+
+    /**
+     * Error message for invalid value
+     */
     private static final String INVALID_BALANCE_PARAM = "&balanceError=profile.invalidBalance";
 
+    /**
+     * Gives methods to work with {@link User}
+     */
     private final UserService service;
+
     private final DecimalValidator validator = new DecimalValidator();
 
     public AddBalanceCommand(UserService service) {
         this.service = service;
     }
 
+    /**
+     * Adds some value to user's wallet
+     *
+     * @param request  http request that was got from browser
+     * @param response http response that should be sent to browser
+     * @return redirect path to balance.jsp
+     * @throws ServiceException if some service error has occurred.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 

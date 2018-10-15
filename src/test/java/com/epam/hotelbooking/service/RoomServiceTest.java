@@ -15,15 +15,14 @@ import static org.mockito.Mockito.*;
 public class RoomServiceTest {
 
     private static final long TEST_ROOM_ID = 1L;
-    private static final Room TEST_ROOM_RESERVED = new Room(1L, null, RoomStatus.RESERVED, null);
-    private static final Room TEST_ROOM_FREE = new Room(2L, null, RoomStatus.FREE, null);
+    private static final Room TEST_ROOM_RESERVED = new Room(null, null, RoomStatus.RESERVED, null);
+    private static final Room TEST_ROOM_FREE = new Room(null, null, RoomStatus.FREE, null);
 
     @Test
     public void shouldReturnTrueOnCheckAssigned() throws DaoException, ServiceException {
         RoomDao roomDao = mock(RoomDao.class);
 
-        Room reservedRoom = new Room(null, null, RoomStatus.RESERVED, null);
-        when(roomDao.findById(anyLong())).thenReturn(Optional.of(reservedRoom));
+        when(roomDao.findById(anyLong())).thenReturn(Optional.of(TEST_ROOM_RESERVED));
 
         RoomService roomService = new RoomService(roomDao);
         boolean actual = roomService.checkAssignment(TEST_ROOM_ID);
@@ -58,7 +57,8 @@ public class RoomServiceTest {
     public void shouldReturnTrueOnMarkRoom() throws DaoException, ServiceException {
         RoomDao roomDao = mock(RoomDao.class);
 
-        when(roomDao.findById(anyLong())).thenReturn(Optional.of(TEST_ROOM_RESERVED));
+        Room testRoom = new Room(null, null, null, null);
+        when(roomDao.findById(anyLong())).thenReturn(Optional.of(testRoom));
         when(roomDao.save(any(Room.class))).thenReturn(true);
 
         RoomService roomService = new RoomService(roomDao);
@@ -71,7 +71,8 @@ public class RoomServiceTest {
     public void shouldReturnFalseOnMarkRoom() throws DaoException, ServiceException {
         RoomDao roomDao = mock(RoomDao.class);
 
-        when(roomDao.findById(anyLong())).thenReturn(Optional.of(TEST_ROOM_RESERVED));
+        Room testRoom = new Room(null, null, null, null);
+        when(roomDao.findById(anyLong())).thenReturn(Optional.of(testRoom));
         when(roomDao.save(any(Room.class))).thenReturn(false);
 
         RoomService roomService = new RoomService(roomDao);

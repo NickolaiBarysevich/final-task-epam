@@ -13,6 +13,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link ApplicationDto}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class ApplicationDtoBuilder implements Builder<ApplicationDto> {
 

@@ -2,6 +2,7 @@ package com.epam.hotelbooking.service;
 
 import com.epam.hotelbooking.dao.ApplicationDao;
 import com.epam.hotelbooking.dao.ApplicationDtoDao;
+import com.epam.hotelbooking.entity.Application;
 import com.epam.hotelbooking.entity.ApplicationStatus;
 import com.epam.hotelbooking.entity.dto.ApplicationDto;
 import com.epam.hotelbooking.exception.DaoException;
@@ -51,13 +52,6 @@ public class ApplicationDtoService {
         }
     }
 
-    public boolean isCanceled(Long id) throws ServiceException {
-        try {
-            return applicationDao.findCanceledApplicationById(id).isPresent();
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
-    }
 
     public List<ApplicationDto> getApplications(String sortParam) throws ServiceException {
         if (sortParam == null) {
@@ -78,6 +72,20 @@ public class ApplicationDtoService {
             default:
                 return findApplications(ApplicationStatus.CONSIDERING);
 
+        }
+    }
+
+    public boolean isConsidering(Long applicationId) throws ServiceException {
+        try {
+            Optional<Application> optionalApplication = applicationDao.findById(applicationId);
+            if (optionalApplication.isPresent()) {
+                Application application = optionalApplication.get();
+                return application.getApplicationStatus() == ApplicationStatus.CONSIDERING;
+            }
+
+            throw new ServiceException("application doesn't exist");
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 

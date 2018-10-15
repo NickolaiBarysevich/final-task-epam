@@ -28,7 +28,8 @@ div h2 {
 
 .profile-content {
     padding: 10px;
-    min-width: 510px;
+    min-width: 595px;
+    min-height: 291px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.9);
     transform: translate(-50%, -50%);
@@ -37,6 +38,8 @@ div h2 {
     top: 50%;
     left: 50%;
 }
+
+
 
 .info-container {
 
@@ -74,16 +77,26 @@ div h2 {
     display: none;
 }
 
+.make-application-link {
+    color: white;
+    padding: 8.5px;
+    border: none;
+    background: #2bc307;
+    transition: 500ms all;
+}
+
+.make-application-link:hover {
+    background: #2eee0c;
+    box-shadow: 0 0 10px #627bff;
+
+}
+
 .message-block {
-    background-color: rgba(255, 255, 255, 0.9);
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 534px;
+    background-color: rgb(255, 255, 255);
     text-align: center;
     font-size: 28px;
     border-radius: 2px;
+    margin-bottom: 10px;
 }
 
 .to-right {
@@ -178,13 +191,6 @@ div h2 {
 
     }
 
-    .message-block {
-        position: static;
-        transform: none;
-        top: 0;
-        left: 0;
-        margin: auto;
-    }
 
     .link-container {
         display: inline-grid;

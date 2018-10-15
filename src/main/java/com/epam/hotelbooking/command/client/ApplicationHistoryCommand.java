@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Paginates and represents user's application.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class ApplicationHistoryCommand implements Command {
 
     private static final int RECORDS_AMOUNT = 5;
@@ -25,6 +30,15 @@ public class ApplicationHistoryCommand implements Command {
         this.service = service;
     }
 
+    /**
+     * Sets as attribute paginated list of {@link ApplicationBillDto}
+     * to the {@code request}.
+     *
+     * @param request  http request that was got from browser
+     * @param response http response that should be sent to browser
+     * @return applicationHistory.jsp
+     * @throws ServiceException if some service error has occurred.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 

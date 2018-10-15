@@ -17,9 +17,22 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+/**
+ * Allows user to pay for the room.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class PayCommand implements Command {
 
+    /**
+     * Error message if there is not enough money on
+     * user's wallet
+     */
     private static final String NOT_ENOUGH_MONEY_MESSAGE = "&message=profile.notEnoughMoney";
+
+    /**
+     * Thanks message for the payment
+     */
     private static final String PAYMENT_THANKS_MESSAGE = "&message=profile.paymentThanks";
 
     private final ApplicationService applicationService;
@@ -34,6 +47,19 @@ public class PayCommand implements Command {
         this.roomService = roomService;
     }
 
+    /**
+     * Changes the status of the application of "paid" and
+     * the room status on "busy". Subtract the room price
+     * from user's wallet. After that the application is
+     * considered as paid.
+     *
+     * @param request http request that was got from browser
+     * @param response http response that should be sent to browser
+     * @return the specified redirect path.
+     * @throws ServiceException if some service error has occurred
+     *                          or {@code optionApplication} is {Optional.empty}
+     *                          or {@code optionBill} is {Optional.empty}.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 
@@ -53,9 +79,8 @@ public class PayCommand implements Command {
         Application application = optionalApplication.get();
 
         if (application.getApplicationStatus() != ApplicationStatus.APPROVED) {
-            return JspConstants.APPLICATION_HISTORY_JSP;
+            return RedirectConstants.APPLICATION_HISTORY_REDIRECT;
         }
-
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(User.TABLE_NAME);

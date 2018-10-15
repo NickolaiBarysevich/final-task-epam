@@ -46,7 +46,7 @@ public class AuthorisationFilter implements Filter {
         String command = httpRequest.getParameter(CommandConstants.COMMAND);
 
         if (role == UserRole.CLIENT && isAdminCommand(command)) {
-            redirectPage = RedirectConstants.HOME_REDIRECT;
+            redirectPage = RedirectConstants.APPLICATION_REGISTRATION_REDIRECT;
         } else if (role == UserRole.ADMINISTRATOR
                 && !isAdminCommand(command)
                 && !CommandConstants.EXIT.equals(command)) {

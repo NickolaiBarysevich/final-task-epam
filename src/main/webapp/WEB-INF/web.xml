@@ -61,5 +61,14 @@
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
 
+    <context-param>
+        <param-name>isLog4jContextSelectorNamed</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>file:///src/main/resources/log4j2.xml</param-value>
+    </context-param>
 
 </web-app>

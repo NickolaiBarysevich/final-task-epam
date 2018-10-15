@@ -5,7 +5,8 @@
 <fmt:setLocale value="${language}" scope="session"/>
 <fmt:setBundle basename="text" var="lang"/>
 <fmt:message key="header.locale" bundle="${lang}" var="locale"/>
-<c:url value="controller?command=applicationHistory&language=${locale}&page=${currentPage}" var="langRedirect" scope="request"/>
+<c:url value="controller?command=applicationHistory&language=${locale}&page=${currentPage}" var="langRedirect"
+       scope="request"/>
 <jsp:include page="maket.jsp"/>
 
 <html lang="${language}">
@@ -17,23 +18,27 @@
 </head>
 <body>
 <main class="content">
-    <c:if test="${param.get('message') != null}">
-        <div class="message-block"><fmt:message key="${param.get('message')}" bundle="${lang}"/></div>
-    </c:if>
+
     <div class="profile-content">
+        <c:if test="${param.get('message') != null}">
+            <div class="message-block"><fmt:message key="${param.get('message')}" bundle="${lang}"/></div>
+        </c:if>
 
         <div class="link-container">
+
             <a class="profile-link" href="controller?command=profile"><fmt:message key="profile.personalData"
                                                                                    bundle="${lang}"/></a>
             <a class="profile-link" href="#"><fmt:message key="profile.applicationHistory" bundle="${lang}"/></a>
             <a class="profile-link" href="controller?command=showBalance"><fmt:message key="profile.balance"
-                                                                                   bundle="${lang}"/></a>
+                                                                                       bundle="${lang}"/></a>
+            <a class="make-application-link" href="controller?command=showApplicationRegistration"><fmt:message
+                    key="profile.makeApplication" bundle="${lang}"/></a>
         </div>
         <hr>
 
         <div class="info-container">
 
-            <table >
+            <table>
                 <tr>
                     <th><fmt:message key="profile.applicationNumber" bundle="${lang}"/></th>
                     <th class="to_hide"><fmt:message key="home.checkIn" bundle="${lang}"/></th>
@@ -57,7 +62,8 @@
         </div>
         <div class="page-container">
             <c:if test="${currentPage > 1}">
-                <a class="page-button" href="controller?command=applicationHistory&page=${currentPage - 1}"><fmt:message key="profile.previous" bundle="${lang}"/></a>
+                <a class="page-button" href="controller?command=applicationHistory&page=${currentPage - 1}"><fmt:message
+                        key="profile.previous" bundle="${lang}"/></a>
             </c:if>
             <c:if test="${1 lt numOfPages}">
                 <c:forEach begin="1" end="${numOfPages}" var="i">
@@ -73,7 +79,8 @@
             </c:if>
             <c:if test="${currentPage lt numOfPages}">
                 <a class="page-button"
-                   href="controller?command=applicationHistory&page=${currentPage + 1}"><fmt:message key="profile.next" bundle="${lang}"/></a>
+                   href="controller?command=applicationHistory&page=${currentPage + 1}"><fmt:message key="profile.next"
+                                                                                                     bundle="${lang}"/></a>
             </c:if>
         </div>
     </div>

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link Bill}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class BillBuilder implements Builder<Bill> {
 

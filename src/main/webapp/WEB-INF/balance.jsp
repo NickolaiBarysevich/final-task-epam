@@ -22,14 +22,18 @@
         <div class="link-container">
             <a class="profile-link" href="controller?command=profile"><fmt:message key="profile.personalData"
                                                                                    bundle="${lang}"/></a>
-            <a class="profile-link" href="controller?command=applicationHistory"><fmt:message key="profile.applicationHistory" bundle="${lang}"/></a>
+            <a class="profile-link" href="controller?command=applicationHistory"><fmt:message
+                    key="profile.applicationHistory" bundle="${lang}"/></a>
             <a class="profile-link" href="#"><fmt:message key="profile.balance" bundle="${lang}"/></a>
+            <a class="make-application-link" href="controller?command=showApplicationRegistration"><fmt:message
+                    key="profile.makeApplication" bundle="${lang}"/></a>
         </div>
         <hr>
 
         <div class="info-container">
             <form action="controller" method="post">
-                <h3><fmt:message key="profile.currentBalance" bundle="${lang}"/> <fmt:formatNumber value="${user.wallet}" currencyCode="USD" type="currency"/></h3>
+                <h3><fmt:message key="profile.currentBalance" bundle="${lang}"/> <fmt:formatNumber
+                        value="${user.wallet}" currencyCode="USD" type="currency"/></h3>
                 <input name="command" value="addBalance" type="hidden">
                 <input name="addingValue" type="text" title="Введите сумму для пополнения"
                        pattern="\d{1,6}(\.\d{1,2})?">

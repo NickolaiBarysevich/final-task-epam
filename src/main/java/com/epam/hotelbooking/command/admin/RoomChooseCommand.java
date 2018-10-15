@@ -17,16 +17,44 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Represents and paginates the list of rooms when the user
+ * choose an application.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class RoomChooseCommand implements Command {
 
+    /**
+     * Rooms to view on each pages
+     */
     private static final int RECORDS_PER_PAGE = 13;
 
-    private static final String IS_ASSIGNED_PARAM = "management.isAssigned";
-    private static final String NOT_SELECTED_PARAM = "management.notSelected";
+    /**
+     * Parameter name for error message
+     */
     private static final String MANAGEMENT_ERROR = "managementError";
-    private static final String CANCELED_APPLICATION_PARAM = "management.canceledApplication";
 
+    /**
+     * Error message for situation when user trying to assign room
+     * to not considering application
+     */
+    private static final String NOT_ASSIGNABLE_PARAM = "management.notAssignable";
+
+    /**
+     * Error message for situation when user trying to assign room
+     * but didn't choose an application
+     */
+    private static final String NOT_SELECTED_PARAM = "management.notSelected";
+
+    /**
+     * Gives methods to work with {@link RoomDto}
+     */
     private RoomDtoService roomDtoService;
+
+    /**
+     * Gives methods to work with {@link ApplicationDto}
+     */
     private ApplicationDtoService applicationDtoService;
 
     public RoomChooseCommand(RoomDtoService roomDtoService, ApplicationDtoService applicationDtoService) {
@@ -34,6 +62,16 @@ public class RoomChooseCommand implements Command {
         this.applicationDtoService = applicationDtoService;
     }
 
+    /**
+     * Paginates the list of {@link RoomDto} to be viewed
+     * on roomChoose.jsp page.
+     *
+     * @param request http request that was got from browser
+     * @param response http response that should be sent to browser
+     * @return roomChoose.jsp page
+     * @throws ServiceException if some service error has occurred
+     *                          or {@code optionalApplication} is {@code Optional.empty}.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 
@@ -44,8 +82,8 @@ public class RoomChooseCommand implements Command {
 
         Long applicationId = Long.parseLong(applicationIdValue);
 
-        if (applicationDtoService.isCanceled(applicationId)) {
-            return formError(request, CANCELED_APPLICATION_PARAM);
+        if (!applicationDtoService.isConsidering(applicationId)) {
+            return formError(request, NOT_ASSIGNABLE_PARAM);
         }
 
         Optional<ApplicationDto> optionalApplication = applicationDtoService.findApplicationById(applicationId);
@@ -55,10 +93,6 @@ public class RoomChooseCommand implements Command {
         }
 
         ApplicationDto application = optionalApplication.get();
-
-        if (application.getRoomId() != null) {
-            return formError(request, IS_ASSIGNED_PARAM);
-        }
 
         String sortParam = request.getParameter(CommonConstants.SORT_PARAM);
         List<RoomDto> roomList = roomDtoService.getRoomList(sortParam);

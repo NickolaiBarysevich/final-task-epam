@@ -38,25 +38,7 @@ public class BillServiceTest {
         Assert.assertFalse(actual);
     }
 
-    @Test
-    public void shouldReturnTrueOnIsApproved() throws DaoException, ServiceException {
-        when(billDao.findBillByApplicationId(anyLong())).thenReturn(Optional.of(TEST_BILL));
 
-        BillService service = new BillService(billDao);
-        boolean actual = service.isApproved(TEST_APPLICATION_ID);
-
-        Assert.assertTrue(actual);
-    }
-
-    @Test
-    public void shouldReturnFalseOnIsApproved() throws DaoException, ServiceException {
-        when(billDao.findBillByApplicationId(anyLong())).thenReturn(Optional.empty());
-
-        BillService service = new BillService(billDao);
-        boolean actual = service.isApproved(TEST_APPLICATION_ID);
-
-        Assert.assertFalse(actual);
-    }
 
     @Test
     public void shouldReturnOptionOfBill() throws DaoException, ServiceException {

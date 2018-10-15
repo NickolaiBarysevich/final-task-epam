@@ -6,8 +6,19 @@ import com.epam.hotelbooking.entity.dto.ApplicationBillDto;
 import com.epam.hotelbooking.entity.dto.ApplicationDto;
 import com.epam.hotelbooking.entity.dto.RoomDto;
 
+/**
+ * Creates an object of {@link Identifiable} builder.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class BuilderFactory {
 
+    /**
+     * Creates specified builder by {@code tableName}.
+     *
+     * @param tableName the name of the entity which builder is needed.
+     * @return specified builder.
+     */
     public static Builder<? extends Identifiable> create(String tableName) {
         switch (tableName) {
             case User.TABLE_NAME:

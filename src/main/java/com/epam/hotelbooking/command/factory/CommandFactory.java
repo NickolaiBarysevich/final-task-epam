@@ -12,8 +12,24 @@ import com.epam.hotelbooking.exception.DaoException;
 import com.epam.hotelbooking.exception.UnknownCommandException;
 import com.epam.hotelbooking.service.*;
 
+/**
+ * Creates and return a concrete command.
+ * The class {@link DaoManager} holds connection
+ * and gives it to the services. After the command
+ * finishes its actions the connection is closing.
+ *
+ * @author Nickolai Barysevich
+ */
 public class CommandFactory {
 
+    /**
+     * Take as parameter string {@code command} and
+     * creates a {@link Command} that matches the
+     * parameter. Also creates services for commands.
+     *
+     * @param command concrete command the should be created.
+     * @return concrete command.
+     */
     public Command create(String command) {
         try (DaoManager daoManager = new DaoManager()) {
             switch (command) {
@@ -25,7 +41,7 @@ public class CommandFactory {
                     return new ExitCommand();
 
                 case CommandConstants.PROFILE:
-                    return new ProfileCommand();
+                    return new ShowProfileCommand();
 
                 case CommandConstants.MANAGEMENT:
                     ApplicationDtoService applicationDtoService =
@@ -50,16 +66,16 @@ public class CommandFactory {
                 case CommandConstants.SHOW_LOGIN:
                     return new ShowLoginCommand();
 
-                case CommandConstants.SHOW_HOME:
-                    return new ShowHomePageCommand();
+                case CommandConstants.SHOW_APPLICATION_REGISTRATION:
+                    return new ShowApplicationRegistrationCommand();
 
                 case CommandConstants.SHOW_INFO:
                     ApplicationBillDtoService applicationBillDtoService =
                             new ApplicationBillDtoService(daoManager.getApplicationBillDtoDao());
-                    return new ShowInfoCommand(applicationBillDtoService);
+                    return new ApplicationInfoCommand(applicationBillDtoService);
 
-                case CommandConstants.ERROR:
-                    return new ErrorCommand();
+                case CommandConstants.SHOW_ERROR:
+                    return new ShowErrorCommand();
 
                 case CommandConstants.SHOW_REGISTRATION:
                     return new ShowRegistrationCommand();
@@ -96,13 +112,11 @@ public class CommandFactory {
                     roomService = new RoomService(daoManager.getRoomDao());
                     return new CancelApprovedCommand(billService, roomService, applicationService);
 
-                case CommandConstants.NOT_FOUND:
-                    return new NotFoundCommand();
                 default:
                     throw new UnknownCommandException(command);
             }
         } catch (DaoException e) {
-            return new ErrorCommand();
+            return new ShowErrorCommand();
         }
 
     }

@@ -3,10 +3,7 @@ package com.epam.hotelbooking.command.admin;
 import com.epam.hotelbooking.command.Command;
 import com.epam.hotelbooking.command.CommonConstants;
 import com.epam.hotelbooking.command.RedirectConstants;
-import com.epam.hotelbooking.entity.Application;
-import com.epam.hotelbooking.entity.ApplicationStatus;
-import com.epam.hotelbooking.entity.Bill;
-import com.epam.hotelbooking.entity.RoomStatus;
+import com.epam.hotelbooking.entity.*;
 import com.epam.hotelbooking.exception.ServiceException;
 import com.epam.hotelbooking.service.ApplicationService;
 import com.epam.hotelbooking.service.BillService;
@@ -19,17 +16,52 @@ import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+/**
+ * This is administrator command by which he allowed to
+ * assign rooms to the {@link Application}.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class AssignRoomCommand implements Command {
 
+    /**
+     * The name of the room price parameter
+     */
     private static final String PRICE_PARAM = "price";
-    private static final String NOT_SELECTED = "&chooseError=roomChoose.notSelected&application_id=";
-    private static final String IS_ASSIGNED = "&chooseError=roomChoose.isAssigned&application_id=";
-    private static final String MANAGEMENT_ERROR_IS_ASSIGNED = "&managementError=roomChoose.isAssigned";
-    private static final String MANAGEMENT_ERROR_CANCELED_APPLICATION = "&managementError=management.canceledApplication";
 
+    /**
+     * Error message for situation when user pressed the assign button
+     * but didn't choose a room
+     */
+    private static final String NOT_SELECTED = "&chooseError=roomChoose.notSelected&application_id=";
+
+    /**
+     * Error message for situation when user trying to assign room which
+     * is already assigned
+     */
+    private static final String IS_ASSIGNED = "&chooseError=roomChoose.isAssigned&application_id=";
+
+    /**
+     * Error message for situation when user trying to assign room
+     * to not considering application
+     */
+    private static final String MANAGEMENT_ERROR_NOT_ASSIGNABLE_APPLICATION = "&managementError=management.notAssignable";
+
+    /**
+     * Gives methods to work with {@link Bill}
+     */
     private final BillService billService;
+
+    /**
+     * Gives methods to work with {@link Room}
+     */
     private final RoomService roomService;
+
+    /**
+     * Gives methods to work with {@link Application}
+     */
     private final ApplicationService applicationService;
+
 
     public AssignRoomCommand(BillService billService, RoomService roomService, ApplicationService applicationService) {
         this.billService = billService;
@@ -37,6 +69,17 @@ public class AssignRoomCommand implements Command {
         this.applicationService = applicationService;
     }
 
+    /**
+     * Getting information about {@link Room} and {@link Application}
+     * from {@code request}. From this information creates a {@link Bill}
+     * and set room status as "reserved"
+     *
+     * @param request  http request that was got from browser
+     * @param response http response that should be sent to browser
+     * @return management redirect or room choose redirect.
+     * @throws ServiceException if some service error has occurred
+     *                          or {@code optionalApplication} is {@code Optional.empty}.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 
@@ -54,9 +97,6 @@ public class AssignRoomCommand implements Command {
             return RedirectConstants.ROOM_CHOOSE_REDIRECT + IS_ASSIGNED + applicationIdParam;
         }
 
-        if (billService.isApproved(applicationId)) {
-            return RedirectConstants.MANAGEMENT_REDIRECT + MANAGEMENT_ERROR_IS_ASSIGNED;
-        }
 
         Optional<Application> optionalApplication = applicationService.findApplicationById(applicationId);
 
@@ -66,8 +106,8 @@ public class AssignRoomCommand implements Command {
 
         Application application = optionalApplication.get();
 
-        if (application.getApplicationStatus() == ApplicationStatus.CANCELED) {
-            return RedirectConstants.MANAGEMENT_REDIRECT + MANAGEMENT_ERROR_CANCELED_APPLICATION;
+        if (application.getApplicationStatus() != ApplicationStatus.CONSIDERING) {
+            return RedirectConstants.MANAGEMENT_REDIRECT + MANAGEMENT_ERROR_NOT_ASSIGNABLE_APPLICATION;
         }
 
         DaysCalculator daysCalculator = new DaysCalculator();

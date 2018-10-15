@@ -11,6 +11,8 @@ import java.sql.ResultSet;
  * of creation an object.
  *
  * @param <T> the type of element that must be created.
+ *
+ * @author Nickolai Barysevich.
  */
 public interface Builder<T extends Identifiable> {
 

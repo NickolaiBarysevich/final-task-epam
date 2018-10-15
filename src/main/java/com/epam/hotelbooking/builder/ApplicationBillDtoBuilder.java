@@ -14,6 +14,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link ApplicationBillDto}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class ApplicationBillDtoBuilder implements Builder<ApplicationBillDto> {
 

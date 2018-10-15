@@ -1,6 +1,5 @@
 package com.epam.hotelbooking.command.common;
 
-import com.epam.hotelbooking.command.JspConstants;
 import com.epam.hotelbooking.command.RedirectConstants;
 import com.epam.hotelbooking.entity.User;
 import com.epam.hotelbooking.entity.UserRole;
@@ -20,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 public class LoginCommandTest {
 
-    private static final String HOME_REDIRECT = RedirectConstants.HOME_REDIRECT;
+    private static final String HOME_REDIRECT = RedirectConstants.APPLICATION_REGISTRATION_REDIRECT;
     private static final String MANAGEMENT_REDIRECT = RedirectConstants.MANAGEMENT_REDIRECT;
     private static final String SHOW_LOGIN_REDIRECT = RedirectConstants.SHOW_LOGIN_REDIRECT;
 

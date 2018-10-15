@@ -10,6 +10,8 @@ import java.sql.SQLException;
 
 /**
  * Creates an object of the {@link User}.
+ *
+ * @author Nickolai Barysevich.
  */
 public class UserBuilder implements Builder<User> {
 

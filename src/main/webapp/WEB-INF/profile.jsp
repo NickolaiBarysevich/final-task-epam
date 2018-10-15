@@ -26,7 +26,9 @@
             <a class="profile-link" href="controller?command=applicationHistory"><fmt:message
                     key="profile.applicationHistory" bundle="${lang}"/></a>
             <a class="profile-link" href="controller?command=showBalance"><fmt:message key="profile.balance"
-                                                                                   bundle="${lang}"/></a>
+                                                                                       bundle="${lang}"/></a>
+            <a class="make-application-link" href="controller?command=showApplicationRegistration"><fmt:message
+                    key="profile.makeApplication" bundle="${lang}"/></a>
         </div>
         <hr>
 
