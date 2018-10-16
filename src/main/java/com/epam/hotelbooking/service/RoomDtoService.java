@@ -7,6 +7,12 @@ import com.epam.hotelbooking.exception.ServiceException;
 
 import java.util.List;
 
+/**
+ * Service {@link RoomDtoDao} to work with view of
+ * "room" and "room_class"
+ *
+ * @author Nickolai Barysevich
+ */
 public class RoomDtoService {
 
     private static final String FREE_SORT_PARAM = "free";
@@ -19,14 +25,21 @@ public class RoomDtoService {
         this.dao = dao;
     }
 
-
-    public List<RoomDto> getRoomList(String sortParam) throws ServiceException {
+    /**
+     * Return the list of the {@link RoomDto}.
+     * A record must have status as specified.
+     *
+     * @param status status which must have records.
+     * @return ist of the {@link RoomDto}.
+     * @throws ServiceException if some dao error has occurred.
+     */
+    public List<RoomDto> getRoomList(String status) throws ServiceException {
         try {
-            if (sortParam == null) {
-                sortParam = FREE_SORT_PARAM;
+            if (status == null) {
+                status = FREE_SORT_PARAM;
             }
 
-            switch (sortParam) {
+            switch (status) {
                 case ALL_SORT_PARAM:
                     return dao.findAll();
                 case BUSY_SORT_PARAM:

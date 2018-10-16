@@ -1,6 +1,12 @@
 package com.epam.hotelbooking.exception;
 
+/**
+ * Signals that an service exception of some sort has occurred.
+ *
+ * @author Nickolai Barysevich
+ */
 public class ServiceException extends Exception {
+
     public ServiceException() {
     }
 

@@ -4,7 +4,12 @@ import com.epam.hotelbooking.exception.ServiceException;
 import com.epam.hotelbooking.service.ApplicationRoomBillService;
 import org.apache.log4j.Logger;
 
-
+/**
+ * Invokes service to find expired applications in
+ * database.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class ApplicationChecker implements Runnable {
 
     private final Logger logger = Logger.getLogger(ApplicationChecker.class);

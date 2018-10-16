@@ -6,11 +6,24 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 
-
+/**
+ * Sets the locale to the request and response.
+ */
 public class LocaleFilter implements Filter {
 
+    /**
+     * Language attribute name
+     */
     private static final String LANGUAGE = "language";
+
+    /**
+     * Locale attribute name
+     */
     private static final String LOCALE = "locale";
+
+    /**
+     * Russian locale. Default locale.
+     */
     private static final String RU_LOCALE = "ru";
 
     @Override

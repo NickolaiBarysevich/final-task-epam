@@ -65,32 +65,33 @@
                 </tr>
             </c:forEach>
         </table>
+        <div class="pages-holder">
+            <c:if test="${currentPage > 1}">
+                <a class="page-button"
+                   href="controller?command=roomChoose&sort=${sort}&page=${currentPage - 1}&application_id=${application.id}"><fmt:message
+                        key="profile.previous" bundle="${lang}"/></a>
+            </c:if>
+            <c:if test="${1 lt numOfPages}">
+                <c:forEach begin="1" end="${numOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <span class="selected">${i}</span>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="page-button"
+                               href="controller?command=roomChoose&sort=${sort}&page=${i}&application_id=${application.id}">${i}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </c:if>
+            <c:if test="${currentPage lt numOfPages}">
+                <a class="page-button"
+                   href="controller?command=roomChoose&sort=${sort}&page=${currentPage + 1}&application_id=${application.id}"><fmt:message
+                        key="profile.next" bundle="${lang}"/></a>
+            </c:if>
+        </div>
     </div>
-    <div class="pages-holder">
-        <c:if test="${currentPage > 1}">
-            <a class="page-button"
-               href="controller?command=roomChoose&sort=${sort}&page=${currentPage - 1}&application_id=${application.id}"><fmt:message
-                    key="profile.previous" bundle="${lang}"/></a>
-        </c:if>
-        <c:if test="${1 lt numOfPages}">
-            <c:forEach begin="1" end="${numOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <span class="selected">${i}</span>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="page-button"
-                           href="controller?command=roomChoose&sort=${sort}&page=${i}&application_id=${application.id}">${i}</a>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </c:if>
-        <c:if test="${currentPage lt numOfPages}">
-            <a class="page-button"
-               href="controller?command=roomChoose&sort=${sort}&page=${currentPage + 1}&application_id=${application.id}"><fmt:message
-                    key="profile.next" bundle="${lang}"/></a>
-        </c:if>
-    </div>
+
 </main>
 <script type="text/javascript">
     $(document).ready(function () {

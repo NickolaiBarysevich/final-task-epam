@@ -1,6 +1,13 @@
 package com.epam.hotelbooking.exception;
 
+/**
+ * Signals that command that is tried to process
+ * is unknown.
+ *
+ * @author Nickolai Barysevich
+ */
 public class UnknownCommandException extends RuntimeException {
+
     public UnknownCommandException() {
     }
 

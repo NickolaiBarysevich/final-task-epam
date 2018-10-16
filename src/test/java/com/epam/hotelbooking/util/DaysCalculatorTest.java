@@ -16,7 +16,7 @@ public class DaysCalculatorTest {
     @Test
     public void shouldReturnExpectedDays() {
         DaysCalculator daysCalculator = new DaysCalculator();
-        int actual = daysCalculator.getDaysBetweenDates(TEST_APPLICATION);
+        int actual = daysCalculator.calculateDaysBetweenDates(TEST_APPLICATION);
 
         Assert.assertEquals(actual, EXPECTED_DAYS);
     }

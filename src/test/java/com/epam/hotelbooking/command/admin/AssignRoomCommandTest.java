@@ -25,8 +25,8 @@ public class AssignRoomCommandTest {
     private static final String TEST_PRICE_PARAM = "20";
     private static final String MANAGEMENT_REDIRECT = RedirectConstants.MANAGEMENT_REDIRECT;
     private static final String MANAGEMENT_ERROR_NOT_ASSIGNABLE_APPLICATION = "&managementError=management.notAssignable";
-    private static final Application TEST_APPROVED_APPLICATION =
-            new Application(0L, 0, Date.valueOf("2018-10-10"), Date.valueOf("2018-10-10"), ApplicationStatus.APPROVED, 0L, 0L);
+    private static final Application TEST_APPROVED_CONSIDERING =
+            new Application(0L, 0, Date.valueOf("2018-10-10"), Date.valueOf("2018-10-10"), ApplicationStatus.CONSIDERING, 0L, 0L);
     private static final Application TEST_EXPIRED_APPLICATION =
             new Application(0L, 0, Date.valueOf("2018-10-10"), Date.valueOf("2018-10-10"), ApplicationStatus.EXPIRED, 0L, 0L);
 
@@ -46,7 +46,7 @@ public class AssignRoomCommandTest {
         when(roomService.markRoom(anyLong(), any(RoomStatus.class))).thenReturn(true);
 
         when(applicationService.markApplication(anyLong(), any(ApplicationStatus.class))).thenReturn(true);
-        when(applicationService.findApplicationById(anyLong())).thenReturn(Optional.of(TEST_APPROVED_APPLICATION));
+        when(applicationService.findApplicationById(anyLong())).thenReturn(Optional.of(TEST_APPROVED_CONSIDERING));
 
         AssignRoomCommand command = new AssignRoomCommand(billService, roomService, applicationService);
         String actual = command.execute(request, response);

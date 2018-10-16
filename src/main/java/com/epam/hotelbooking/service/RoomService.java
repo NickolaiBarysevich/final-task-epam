@@ -8,6 +8,12 @@ import com.epam.hotelbooking.exception.ServiceException;
 
 import java.util.Optional;
 
+/**
+ * Contains some methods that manipulates with
+ * data from db table "room".
+ *
+ * @author Nickolai Barysevich.
+ */
 public class RoomService {
 
     private final RoomDao dao;
@@ -16,7 +22,14 @@ public class RoomService {
         this.dao = dao;
     }
 
-
+    /**
+     * Marks room as specified status.
+     *
+     * @param roomId room to be marked.
+     * @param status status to be set.
+     * @return true if room was saved
+     * @throws ServiceException if {@code !optionalRoom.isPresent()}
+     */
     public boolean markRoom(Long roomId, RoomStatus status) throws ServiceException {
         try {
             Optional<Room> optionalRoom = dao.findById(roomId);
@@ -24,15 +37,22 @@ public class RoomService {
                 Room room = optionalRoom.get();
                 room.setStatus(status);
                 return dao.save(room);
-            } else {
-                throw new ServiceException("room not found");
             }
+            throw new ServiceException("room not found");
+
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
 
-
+    /**
+     * Defines whether the room is assigned
+     * to an application.
+     *
+     * @param roomId room to be checked.
+     * @return true if room is assigned.
+     * @throws ServiceException if {@code !optionalRoom.isPresent()}
+     */
     public boolean checkAssignment(Long roomId) throws ServiceException {
         try {
             Optional<Room> optionalRoom = dao.findById(roomId);
@@ -41,9 +61,9 @@ public class RoomService {
 
                 RoomStatus status = room.getStatus();
                 return status == RoomStatus.RESERVED || status == RoomStatus.BUSY;
-            } else {
-                throw new ServiceException("room not found");
             }
+            throw new ServiceException("room not found");
+
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

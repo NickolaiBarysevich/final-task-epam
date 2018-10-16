@@ -3,6 +3,11 @@ package com.epam.hotelbooking.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * Sets the encoding to the request.
+ *
+ * @author Nickolai Barysevich
+ */
 public class EncodingFilter implements Filter {
 
     private static final String UTF_8_CHARSET = "UTF-8";

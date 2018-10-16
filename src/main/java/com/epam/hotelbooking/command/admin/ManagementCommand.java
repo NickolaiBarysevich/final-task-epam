@@ -24,9 +24,9 @@ public class ManagementCommand implements Command {
 
     /**
      * Amount of applications that must be viewed on the
-     * page.
+     * page
      */
-    private static final int RECORDS_PER_PAGE = 15;
+    private static final int RECORDS_PER_PAGE = 10;
 
     /**
      * Gives methods to work with {@link ApplicationDto}

@@ -1,5 +1,10 @@
 package com.epam.hotelbooking.exception;
 
+/**
+ * Signals that an builder exception of some sort has occurred.
+ *
+ * @author Nickolai Barysevich
+ */
 public class BuilderException extends Exception {
 
     public BuilderException() {

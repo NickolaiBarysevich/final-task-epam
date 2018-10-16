@@ -116,7 +116,7 @@ div h2 {
 }
 
 .pay-button:hover {
-    background: #1be390;
+    border-radius: 20px;
 }
 
 .profile-content hr {

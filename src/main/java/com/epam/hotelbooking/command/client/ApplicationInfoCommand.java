@@ -44,7 +44,7 @@ public class ApplicationInfoCommand implements Command {
         String applicationIdValue = request.getParameter(Bill.APPLICATION_ID);
         Long applicationId = Long.parseLong(applicationIdValue);
 
-        Optional<ApplicationBillDto> optionalApplication = service.findApplicationDto(applicationId);
+        Optional<ApplicationBillDto> optionalApplication = service.findApplicationBillDto(applicationId);
 
         if (optionalApplication.isPresent()) {
 

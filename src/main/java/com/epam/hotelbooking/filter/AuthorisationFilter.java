@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Check between requests is command allowed
+ * for user with concrete role.
+ *
+ * @author Nickolai Barysevich
+ */
 public class AuthorisationFilter implements Filter {
 
     @Override
@@ -29,19 +35,28 @@ public class AuthorisationFilter implements Filter {
 
             HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-            String redirectPage = getRedirectPage(httpRequest, role);
+            String redirectPage = getRedirectPath(httpRequest, role);
 
             if (redirectPage != null) {
                 httpResponse.sendRedirect(redirectPage);
                 return;
             }
         }
-
-
         chain.doFilter(request, response);
     }
 
-    private String getRedirectPage(HttpServletRequest httpRequest, UserRole role) {
+    /**
+     * If user with role "client" tries to
+     * access "administrator" page return redirect to the
+     * "home" page for the client. If administrator
+     * tries to access "client" page return redirect
+     * to "administrator home" page.
+     *
+     * @param httpRequest request that contains command.
+     * @param role the role of the user.
+     * @return redirect to concrete page.
+     */
+    private String getRedirectPath(HttpServletRequest httpRequest, UserRole role) {
         String redirectPage = null;
         String command = httpRequest.getParameter(CommandConstants.COMMAND);
 

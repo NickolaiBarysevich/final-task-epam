@@ -28,7 +28,7 @@ public class RoomChooseCommand implements Command {
     /**
      * Rooms to view on each pages
      */
-    private static final int RECORDS_PER_PAGE = 13;
+    private static final int RECORDS_PER_PAGE = 15;
 
     /**
      * Parameter name for error message

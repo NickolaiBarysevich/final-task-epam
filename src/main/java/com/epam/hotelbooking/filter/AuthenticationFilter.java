@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Checks between requests is user is authorised.
+ *
+ * @author Nickolai Barysevich
+ */
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -25,7 +30,7 @@ public class AuthenticationFilter implements Filter {
         if (session.getAttribute(User.TABLE_NAME) == null) {
 
             String command = request.getParameter(CommandConstants.COMMAND);
-            if (isAllowed(command)) {
+            if (notAllowed(command)) {
 
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
 
@@ -36,7 +41,14 @@ public class AuthenticationFilter implements Filter {
         chain.doFilter(request, response);
     }
 
-    private boolean isAllowed(String command) {
+    /**
+     * Define is the command not allowed for
+     * unauthorised user.
+     *
+     * @param command command to be checked.
+     * @return true if command not allowed.
+     */
+    private boolean notAllowed(String command) {
         return !CommandConstants.SHOW_LOGIN.equals(command)
                 && !CommandConstants.LOGIN.equals(command)
                 && !CommandConstants.SHOW_REGISTRATION.equals(command)

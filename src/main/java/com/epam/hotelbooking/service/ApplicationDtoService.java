@@ -11,6 +11,14 @@ import com.epam.hotelbooking.exception.ServiceException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class that helps command connect to database.
+ * Works with {@link ApplicationDto} view.
+ * May contain methods that have specific actions
+ * on data from database.
+ *
+ * @author Nickolai Barysevich.
+ */
 public class ApplicationDtoService {
 
     private static final String PAID_SORT = "paid";
@@ -27,6 +35,14 @@ public class ApplicationDtoService {
         this.applicationDao = applicationDao;
     }
 
+    /**
+     * Asks {@code  applicationDtoDao} to find
+     * all records in the view and return the
+     * list of them.
+     *
+     * @return list of {@link ApplicationDto}.
+     * @throws ServiceException if some dao errors has occurred.
+     */
     private List<ApplicationDto> findApplications() throws ServiceException {
         try {
             return applicationDtoDao.findAll();
@@ -35,6 +51,15 @@ public class ApplicationDtoService {
         }
     }
 
+    /**
+     * Asks {@code  applicationDtoDao} to find
+     * all records with specified status in the
+     * view and return the list of them.
+     *
+     * @param status status by which records will be searched.
+     * @return list of {@link ApplicationDto}.
+     * @throws ServiceException if some dao errors has occurred.
+     */
     private List<ApplicationDto> findApplications(ApplicationStatus status) throws ServiceException {
         try {
             return applicationDtoDao.findAll(status);
@@ -43,22 +68,36 @@ public class ApplicationDtoService {
         }
     }
 
-
-    public Optional<ApplicationDto> findApplicationById(Long id) throws ServiceException {
+    /**
+     * Asks {@code  applicationDtoDao} to find
+     * a record by application by id.
+     *
+     * @param applicationId id by which record will be searched.
+     * @return list of {@link ApplicationDto}.
+     * @throws ServiceException if some dao errors has occurred.
+     */
+    public Optional<ApplicationDto> findApplicationById(Long applicationId) throws ServiceException {
         try {
-            return applicationDtoDao.findById(id);
+            return applicationDtoDao.findById(applicationId);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
 
-
-    public List<ApplicationDto> getApplications(String sortParam) throws ServiceException {
-        if (sortParam == null) {
+    /**
+     * Return the list of {@link ApplicationDto}
+     * with concrete status.
+     *
+     * @param status staus by which records will be searched.
+     * @return the list of {@link ApplicationDto} with concrete status.
+     * @throws ServiceException if some dao errors has occurred.
+     */
+    public List<ApplicationDto> getApplications(String status) throws ServiceException {
+        if (status == null) {
             return findApplications(ApplicationStatus.CONSIDERING);
         }
 
-        switch (sortParam) {
+        switch (status) {
             case ALL_SORT:
                 return findApplications();
             case APPROVED_SORT:
@@ -75,6 +114,13 @@ public class ApplicationDtoService {
         }
     }
 
+    /**
+     * Define whether the application is considering.
+     *
+     * @param applicationId id of the application that must be defined
+     * @return true if application is considering
+     * @throws ServiceException ui {@code !optionalApplication.isPresented()}
+     */
     public boolean isConsidering(Long applicationId) throws ServiceException {
         try {
             Optional<Application> optionalApplication = applicationDao.findById(applicationId);

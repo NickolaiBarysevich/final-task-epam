@@ -4,7 +4,8 @@
 <fmt:setLocale value="${language}" scope="session"/>
 <fmt:setBundle basename="text" var="lang"/>
 <fmt:message key="header.locale" bundle="${lang}" var="locale"/>
-<c:url value="controller?command=management&language=${locale}&sort=${sort}&page=${currentPage}" var="langRedirect" scope="request"/>
+<c:url value="controller?command=management&language=${locale}&sort=${sort}&page=${currentPage}" var="langRedirect"
+       scope="request"/>
 <jsp:include page="maket.jsp"/>
 
 
@@ -44,61 +45,64 @@
                                                                                   bundle="${lang}"/></button>
         </form>
 
-        <table cellspacing="0">
-            <tr>
-                <th><fmt:message key="profile.applicationNumber" bundle="${lang}"/></th>
-                <th><fmt:message key="login.username" bundle="${lang}"/></th>
-                <th><fmt:message key="profile.name" bundle="${lang}"/></th>
-                <th><fmt:message key="profile.phoneNumber" bundle="${lang}"/></th>
-                <th><fmt:message key="home.guests" bundle="${lang}"/></th>
-                <th><fmt:message key="home.checkIn" bundle="${lang}"/></th>
-                <th><fmt:message key="home.checkOut" bundle="${lang}"/></th>
-                <th><fmt:message key="home.roomClass" bundle="${lang}"/></th>
-                <th><fmt:message key="applicationInfo.roomNumber" bundle="${lang}"/></th>
-                <th><fmt:message key="applicationInfo.cost" bundle="${lang}"/></th>
-            </tr>
-            <c:forEach var="application" items="${applications}" varStatus="theCount">
-                <tr tabindex="-1">
-                    <td>${application.id}</td>
-                    <td>${application.username}</td>
-                    <td>${application.fullName}</td>
-                    <td>${application.phoneNumber}</td>
-                    <td>${application.places}</td>
-                    <td><fmt:formatDate value="${application.checkIn}"/></td>
-                    <td><fmt:formatDate value="${application.checkOut}"/></td>
-                    <td><fmt:message key="home.${application.roomClass}" bundle="${lang}"/></td>
-                    <td>${application.roomId}</td>
-                    <td><fmt:formatNumber value="${application.cost}" currencyCode="USD" type="currency"/></td>
+        <div class="table-container">
+            <table cellspacing="0">
+                <tr>
+                    <th><fmt:message key="profile.applicationNumber" bundle="${lang}"/></th>
+                    <th><fmt:message key="login.username" bundle="${lang}"/></th>
+                    <th><fmt:message key="profile.name" bundle="${lang}"/></th>
+                    <th><fmt:message key="profile.phoneNumber" bundle="${lang}"/></th>
+                    <th><fmt:message key="home.guests" bundle="${lang}"/></th>
+                    <th><fmt:message key="home.checkIn" bundle="${lang}"/></th>
+                    <th><fmt:message key="home.checkOut" bundle="${lang}"/></th>
+                    <th><fmt:message key="home.roomClass" bundle="${lang}"/></th>
+                    <th><fmt:message key="applicationInfo.roomNumber" bundle="${lang}"/></th>
+                    <th><fmt:message key="applicationInfo.cost" bundle="${lang}"/></th>
                 </tr>
-            </c:forEach>
+                <c:forEach var="application" items="${applications}" varStatus="theCount">
+                    <tr tabindex="-1">
+                        <td>${application.id}</td>
+                        <td>${application.username}</td>
+                        <td>${application.fullName}</td>
+                        <td>${application.phoneNumber}</td>
+                        <td>${application.places}</td>
+                        <td><fmt:formatDate value="${application.checkIn}"/></td>
+                        <td><fmt:formatDate value="${application.checkOut}"/></td>
+                        <td><fmt:message key="home.${application.roomClass}" bundle="${lang}"/></td>
+                        <td>${application.roomId}</td>
+                        <td><fmt:formatNumber value="${application.cost}" currencyCode="USD" type="currency"/></td>
+                    </tr>
+                </c:forEach>
 
-        </table>
+            </table>
+        </div>
+        <div class="pages-holder">
+            <c:if test="${currentPage > 1}">
+                <a class="page-button"
+                   href="controller?command=management&sort=${sort}&page=${currentPage - 1}"><fmt:message
+                        key="profile.previous" bundle="${lang}"/></a>
+            </c:if>
+            <c:if test="${1 lt numOfPages}">
+                <c:forEach begin="1" end="${numOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <span class="selected">${i}</span>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="page-button" href="controller?command=management&sort=${sort}&page=${i}">${i}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </c:if>
+            <c:if test="${currentPage lt numOfPages}">
+                <a class="page-button"
+                   href="controller?command=management&sort=${sort}&page=${currentPage + 1}"><fmt:message
+                        key="profile.next"
+                        bundle="${lang}"/></a>
+            </c:if>
+        </div>
+    </div>
 
-    </div>
-    <div class="pages-holder">
-        <c:if test="${currentPage > 1}">
-            <a class="page-button"
-               href="controller?command=management&sort=${sort}&page=${currentPage - 1}"><fmt:message
-                    key="profile.previous" bundle="${lang}"/></a>
-        </c:if>
-        <c:if test="${1 lt numOfPages}">
-            <c:forEach begin="1" end="${numOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <span class="selected">${i}</span>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="page-button" href="controller?command=management&sort=${sort}&page=${i}">${i}</a>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </c:if>
-        <c:if test="${currentPage lt numOfPages}">
-            <a class="page-button"
-               href="controller?command=management&sort=${sort}&page=${currentPage + 1}"><fmt:message key="profile.next"
-                                                                                                      bundle="${lang}"/></a>
-        </c:if>
-    </div>
 </main>
 <script type="text/javascript">
     $(document).ready(function () {

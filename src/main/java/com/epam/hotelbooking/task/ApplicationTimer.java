@@ -8,6 +8,11 @@ import org.apache.log4j.Logger;
 import java.util.Calendar;
 import java.util.Timer;
 
+/**
+ * Timer for check applications whether them is expired.
+ *
+ * @author Nickolai Barysevich
+ */
 public class ApplicationTimer {
 
     private static final int TWELVE_AM = 12;
@@ -15,6 +20,9 @@ public class ApplicationTimer {
 
     private final Logger logger = Logger.getLogger(ApplicationTimer.class);
 
+    /**
+     * Start the timer
+     */
     public void startTimer() {
         try (DaoManager daoManager = new DaoManager()) {
 

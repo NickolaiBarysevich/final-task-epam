@@ -111,7 +111,7 @@ public class AssignRoomCommand implements Command {
         }
 
         DaysCalculator daysCalculator = new DaysCalculator();
-        int days = daysCalculator.getDaysBetweenDates(application);
+        int days = daysCalculator.calculateDaysBetweenDates(application);
 
         BigDecimal price = new BigDecimal(request.getParameter(PRICE_PARAM));
         Integer places = application.getPlaces();
@@ -123,7 +123,7 @@ public class AssignRoomCommand implements Command {
 
         billService.makeABill(new Bill(null, cost, roomId, applicationId, clientId));
         roomService.markRoom(roomId, RoomStatus.RESERVED);
-        applicationService.markApplication(application, ApplicationStatus.APPROVED);
+        applicationService.markApplication(application.getId(), ApplicationStatus.APPROVED);
 
         return RedirectConstants.MANAGEMENT_REDIRECT;
     }

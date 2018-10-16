@@ -9,30 +9,68 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Works with table "application" and it's object
+ * representation {@link Application}.
+ *
+ * @author Nickolai Barysevich
+ */
 public class ApplicationDao extends AbstractDao<Application> {
 
+    /**
+     * Second part for insertion query
+     */
     private static final String SAVE_QUERY_VALUES = " VALUES(?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE status=?";
 
+    /**
+     * Update query for table "application". Updates
+     * field "status"
+     */
     private static final String UPDATE_STATUS = "UPDATE application SET status=? where id=?";
-    private static final String FIND_CANCELED_APPLICATION_QUERY = SELECT_FROM_QUERY + Application.TABLE_NAME + WHERE_ID_CONDITION + " AND status='canceled'";
 
     public ApplicationDao(Connection connection) {
         super(connection);
     }
 
+    /**
+     * Changes application status to the specified.
+     *
+     * @param id id of the application which status must be changed
+     * @param status status that must be set
+     * @return true if query executed successfully.
+     * @throws DaoException if some dao error has occurred
+     */
     public boolean markApplication(Long id, ApplicationStatus status) throws DaoException {
-        return update(UPDATE_STATUS, status, id);
+        return executeUpdate(UPDATE_STATUS, status, id) != 0;
     }
 
-    public Optional<Application> findCanceledApplicationById(Long id) throws DaoException {
-        return executeForSingleResult(FIND_CANCELED_APPLICATION_QUERY, id);
+    /**
+     * Returns table name.
+     *
+     * @return table name.
+     */
+    @Override
+    protected String getTableName() {
+        return Application.TABLE_NAME;
     }
 
+    /**
+     * Returns the second part of the save query.
+     *
+     * @return the second part of the save query.
+     */
     @Override
     protected String getSaveQuery() {
         return SAVE_QUERY_VALUES;
     }
 
+    /**
+     * Extracts item fields to the object
+     * array.
+     *
+     * @param item item to be extracted.
+     * @return object array.
+     */
     @Override
     protected Object[] extractValuesForSaving(Application item) {
         List<Object> values = new ArrayList<>();
@@ -49,11 +87,6 @@ public class ApplicationDao extends AbstractDao<Application> {
         values.add(item.getApplicationStatus());
 
         return values.toArray();
-    }
-
-    @Override
-    protected String getTableName() {
-        return Application.TABLE_NAME;
     }
 
 }

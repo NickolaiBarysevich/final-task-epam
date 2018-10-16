@@ -1,5 +1,10 @@
 package com.epam.hotelbooking.exception;
 
+/**
+ * Signals that an connection exception of some sort has occurred.
+ *
+ * @author Nickolai Barysevich
+ */
 public class ConnectionException extends Exception {
     public ConnectionException() {
     }

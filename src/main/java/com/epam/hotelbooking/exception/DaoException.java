@@ -1,5 +1,10 @@
 package com.epam.hotelbooking.exception;
 
+/**
+ * Signals that an dao exception of some sort has occurred.
+ *
+ * @author Nickolai Barysevich
+ */
 public class DaoException extends Exception{
     public DaoException() {
     }
