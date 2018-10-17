@@ -4,7 +4,7 @@
 <fmt:setLocale value="${language}" scope="session"/>
 <fmt:setBundle basename="text" var="lang"/>
 <fmt:message key="header.locale" bundle="${lang}" var="locale"/>
-<c:url value="controller?command=balance&language=${locale}" var="langRedirect" scope="request"/>
+<c:url value="controller?command=showBalance&language=${locale}" var="langRedirect" scope="request"/>
 <jsp:include page="maket.jsp"/>
 
 <html lang="${language}">
